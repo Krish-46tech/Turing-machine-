@@ -1,0 +1,9 @@
+flowchart TB
+  UI[React User Interface] --> IV[Input and Definition Validation]
+  IV --> MC[Machine Configuration]
+  MC --> ENG[Pure TypeScript Execution Engine]
+  ENG --> TAPE[Sparse Tape Manager]
+  ENG --> HIST[Snapshot and History Manager]
+  HIST --> VIS[Tape and React Flow Visualizations]
+  HIST --> RES[Result and Validation Module]
+  MC --> IO[JSON Import and Export]

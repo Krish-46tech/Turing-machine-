@@ -1,0 +1,10 @@
+classDiagram
+  class MachineDefinition { +states +alphabets +transitions }
+  class SparseTape { -Map cells +read() +write() +serialize() }
+  class TuringMachineEngine { -configuration -history +initializeMachine() +executeStep() +runUntilHalt() +restoreSnapshot() }
+  class ExecutionSnapshot { +states +symbols +positions +status +tapeSnapshot }
+  class SimulatorStore { +machine +input +configuration +step() +run() +pause() +reset() }
+  MachineDefinition --> TuringMachineEngine
+  TuringMachineEngine *-- SparseTape
+  TuringMachineEngine *-- ExecutionSnapshot
+  SimulatorStore --> TuringMachineEngine

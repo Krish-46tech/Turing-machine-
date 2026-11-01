@@ -1,0 +1,19 @@
+sequenceDiagram
+  actor User
+  participant UI as React UI
+  participant Store as Zustand Store
+  participant Engine as TM Engine
+  participant Tape as Sparse Tape
+  User->>UI: Enter 1101 and initialize
+  UI->>Store: initialize()
+  Store->>Engine: initializeMachine(1101)
+  Engine->>Tape: create sparse cells
+  loop each requested step
+    User->>UI: Step or Run
+    UI->>Store: step()
+    Store->>Engine: executeStep()
+    Engine->>Tape: read write move
+    Engine-->>Store: configuration and snapshot
+    Store-->>UI: render tape graph history
+  end
+  UI-->>User: ACCEPTED after 5 transitions

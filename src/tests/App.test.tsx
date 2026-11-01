@@ -1,0 +1,6 @@
+import { fireEvent,render,screen } from '@testing-library/react';
+import { beforeEach,describe,expect,it } from 'vitest';
+import App from '../App';
+import { ending01 } from '../machines';
+import { useSimulator } from '../store/useSimulator';
+describe('simulator integration',()=>{beforeEach(()=>useSimulator.getState().setMachine(ending01));it('loads dynamic input and steps the actual engine',()=>{render(<App/>);const input=screen.getByLabelText('Input string');fireEvent.change(input,{target:{value:'1101'}});fireEvent.click(screen.getByText('Load'));fireEvent.click(screen.getByLabelText('Execute one step'));expect(useSimulator.getState().configuration.currentState).toBe('q0');expect(useSimulator.getState().configuration.stepCount).toBe(1)});it('blocks symbols outside the input alphabet',()=>{render(<App/>);fireEvent.change(screen.getByLabelText('Input string'),{target:{value:'102'}});expect(screen.getByText(/not in Σ/)).toBeInTheDocument()});it('reset and rewind restore snapshots',()=>{render(<App/>);fireEvent.click(screen.getByLabelText('Execute one step'));fireEvent.click(screen.getByLabelText('Execute one step'));fireEvent.click(screen.getByLabelText('Step backward'));expect(useSimulator.getState().configuration.stepCount).toBe(1);fireEvent.click(screen.getByLabelText('Reset'));expect(useSimulator.getState().configuration.stepCount).toBe(0)})});

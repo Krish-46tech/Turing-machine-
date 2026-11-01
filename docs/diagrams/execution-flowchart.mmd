@@ -1,0 +1,16 @@
+flowchart TD
+  A[Initialize with machine and input] --> B{Definition and input valid?}
+  B -- No --> ERR[ERROR and block execution]
+  B -- Yes --> C{Already in halting state?}
+  C -- Accept --> ACC[ACCEPTED]
+  C -- Reject --> REJ[REJECTED]
+  C -- No --> D{Budget exhausted?}
+  D -- Yes --> LIM[STEP LIMIT REACHED]
+  D -- No --> E[Read state and tape symbol]
+  E --> F{Transition exists?}
+  F -- No --> STUCK[STUCK]
+  F -- Yes --> G[Write symbol]
+  G --> H[Move L R or S]
+  H --> I[Update state and step count]
+  I --> J[Record complete snapshot]
+  J --> C
