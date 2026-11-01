@@ -99,7 +99,7 @@ doc.add_page_break()
 
 # Stable rendered contents index. Editable Word heading styles remain available for an automatic TOC update.
 doc.add_heading('Table of Contents',level=1)
-toc=[('Abstract','3'),('1  Introduction','3'),('2  Problem Statement','3'),('3  Motivation and Problem Selection','3'),('4  Project Objectives','3'),('5  Scope','4'),('6  Formal Automata Specification','4'),('7  Existing Tools and Comparative Analysis','4'),('8  Feasibility Study','4'),('9  Technology Stack','5'),('10  System Architecture','5'),('11  Software Modules','5'),('12  Simulator Flowchart','6'),('13  UML Diagrams','7'),('14  UI Design and Mock-ups','7'),('15  Algorithm Selection','9'),('16  Pseudocode','9'),('17  Correctness Analysis','10'),('18  Complexity Analysis','10'),('19  Manual Validation Example','10'),('20  Built-in Machines','11'),('21  Testing and Verification','11'),('22  Results and Discussion','11'),('23  Limitations','11'),('24  Future Enhancements','11'),('25  Conclusion','12'),('26  References','12'),('27  Appendix A Installation','12'),('28  Appendix B Directory and Sample JSON','12')]
+toc=[('Acknowledgement','3'),('Abstract','3'),('1  Introduction','3'),('2  Problem Statement','3'),('3  Motivation and Problem Selection','3'),('4  Project Objectives','3'),('5  Scope','4'),('6  Formal Automata Specification','4'),('7  Existing Tools and Comparative Analysis','4'),('8  Feasibility Study','5'),('9  Technology Stack','5'),('10  System Architecture','5'),('11  Software Modules','6'),('12  Simulator Flowchart','6'),('13  UML Diagrams','7'),('14  UI Design and Mock-ups','8'),('15  Algorithm Selection','9'),('16  Pseudocode','9'),('17  Correctness Analysis','10'),('18  Complexity Analysis','10'),('19  Manual Validation Example','10'),('20  Built-in Machines','11'),('21  Testing and Verification','11'),('22  Results and Discussion','11'),('23  Limitations','11'),('24  Future Enhancements','12'),('25  Conclusion','12'),('27  References','12'),('28  Appendix A Installation','12'),('29  Appendix B Directory and Sample JSON','13')]
 rows=[]
 for j in range(0,len(toc),2):
     left=toc[j];right=toc[j+1] if j+1<len(toc) else ('','')
@@ -113,6 +113,26 @@ for section in doc.sections:
     fp=section.footer.paragraphs[0];fp.alignment=WD_ALIGN_PARAGRAPH.CENTER;fp.add_run('Page ');add_field(fp,'PAGE')
 
 md=(DOCS/'M1_Report.md').read_text(encoding='utf-8').splitlines()
+ack=next(i for i,x in enumerate(md) if x.strip()=='## 26 Acknowledgement')
+ack_end=next(i for i in range(ack+1,len(md)) if md[i].startswith('## '))
+ack_lines=md[ack:ack_end]
+doc.add_heading('Acknowledgement',level=1)
+ai=1
+while ai<len(ack_lines):
+    line=ack_lines[ai]
+    if not line.strip(): ai+=1;continue
+    if line.startswith('|'):
+        rows=[]
+        while ai<len(ack_lines) and ack_lines[ai].startswith('|'):
+            vals=[x.strip() for x in ack_lines[ai].strip('|').split('|')]
+            if not all(re.fullmatch(r':?-+:?',v) for v in vals): rows.append(vals)
+            ai+=1
+        add_table(rows,[1.55,1.35,3.2])
+        continue
+    if line.startswith('Project repository:'):
+        doc.add_paragraph(line);ai+=1;continue
+    doc.add_paragraph(line);ai+=1
+doc.add_page_break()
 start=next(i for i,x in enumerate(md) if x.strip()=='## Abstract')
 lines=md[start:];i=0;in_code=False;code=[]
 diag_map={'architecture.mmd':'architecture.png','execution-flowchart.mmd':'flowchart.png','component-class.mmd':'uml.png','sequence.mmd':'sequence.png','use-case.mmd':'usecase.png'}
