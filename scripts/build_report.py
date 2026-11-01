@@ -92,9 +92,9 @@ p=doc.add_paragraph(style='Title');p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.add_r
 p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER;r=p.add_run('CSET302  Automata Theory and Computability');r.bold=True;r.font.size=Pt(13)
 p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.add_run('M1  Problem Analysis and Project Design').italic=True
 doc.add_paragraph('\n')
-add_table([['Submission field','Editable value'],['University name','[University name]'],['Student name','[Student name]'],['Enrollment number','[Enrollment number]'],['Faculty name','[Faculty name]'],['Academic year','[Academic year]'],['Submission date','[Submission date]']],[2.2,3.6])
+add_table([['Submission field','Value'],['University name','Bennett University'],['Student name','Krish Kumar'],['Enrollment number','S24CSEU1480'],['Faculty name','Dr Vicky Vikrant'],['Academic year','2028'],['Submission date','2 November 2026']],[2.2,3.6])
 p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_before=Pt(30);p.add_run('TuringLab').bold=True
-p.add_run('\nVerified implementation and design report\n30 October 2026').italic=True
+p.add_run('\nVerified implementation and design report\n2 November 2026').italic=True
 doc.add_page_break()
 
 # Stable rendered contents index. Editable Word heading styles remain available for an automatic TOC update.

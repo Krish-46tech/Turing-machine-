@@ -5,12 +5,12 @@
 
 | Submission field | Editable value |
 |---|---|
-| University name | `[University name]` |
-| Student name | `[Student name]` |
-| Enrollment number | `[Enrollment number]` |
-| Faculty name | `[Faculty name]` |
-| Academic year | `[Academic year]` |
-| Submission date | `[Submission date]` |
+| University name | Bennett University |
+| Student name | Krish Kumar |
+| Enrollment number | S24CSEU1480 |
+| Faculty name | Dr Vicky Vikrant |
+| Academic year | 2028 |
+| Submission date | 2 November 2026 |
 
 ## Abstract
 
